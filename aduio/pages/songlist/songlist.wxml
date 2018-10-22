@@ -1,0 +1,18 @@
+<!--pages/songlist/songlist.wxml-->
+<!-- <text>pages/songlist/songlist.wxml</text> -->
+<template name="songList">
+  <view class="weui-cells weui-cells_after-title song_list">
+    <block wx:for="{{ recommendSong.song }}"  wx:for-index="idx" wx:key="key">
+      <navigator url="" class="weui-cell weui-cell_access" hover-class="false">
+        <view class="weui-cell__hd" wx:if="{{ recommendSong.bool }}">
+          <view class='{{ idx+1<4?"sgfl-cred":"" }}' style="margin-right: 8px;vertical-align: middle;width:20px; height: 20px;">{{ idx+1 }}</view>
+        </view>
+        <view class="weui-cell__bd">
+          <view class='ellipsis'>{{ item.name }}<text class='sgalia' style="margin-left:8rpx;font-size:30rpx">{{ item.alias }}</text></view>
+          <view class='ellipsis sgalia' style='font-size:25rpx'>{{ item.singer }} - {{ item.name }}</view>
+        </view>
+        <view class="weui-cell__ft icon-play_icon iconfont icon_size"></view>
+      </navigator>
+    </block>
+  </view>
+</template>

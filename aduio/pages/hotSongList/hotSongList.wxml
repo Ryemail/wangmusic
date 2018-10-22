@@ -1,0 +1,12 @@
+<!--pages/hotSongList/hotSongList.wxml-->
+<import src="../songlist/songlist.wxml" />
+<template name="hotSongList">
+    <view class='banner'>
+      <view class='banner-two'>
+        <view class='banner_two_bg'></view>
+        <view class='times'>更新日期：10月18日</view>
+      </view>
+    </view>
+    <template is="songList" data ="{{ recommendSong }}"></template>
+</template>
+

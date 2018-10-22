@@ -1,0 +1,31 @@
+@import '../recommendSong/recommendSong.wxss';/* 推荐歌曲 */
+@import '../songlist/songlist.wxss';/* 歌曲列表 */
+@import '../hotSongList/hotSongList.wxss';/* 热歌榜 */
+
+
+.weui-tab__content{
+    padding-top: 35rpx;
+}
+.weui-navbar{
+  background: #fff;
+}
+.weui-navbar__item.weui-bar__item_on{
+  color: #d43c33
+}
+.weui-navbar__slider{
+  background: #d43c33
+}
+.weui-navbar{
+  position: fixed;
+  top:0;
+  left:0;
+  border:none;
+  box-shadow: 0  0 .5px #ddd;
+  /* border-color: #e6e6e6; */
+}
+.sgfl-cred {
+    color: #df3436;
+}
+.sgalia{
+  color: #888;
+}

@@ -1,0 +1,11 @@
+/* pages/songlist/songlist.wxss */
+.song_list .weui-cell__bd{
+  width: 70%;
+  box-sizing: border-box;
+}
+.song_list .ellipsis{
+  max-width: 90%;
+}
+.icon_size{
+  font-size: 40rpx;
+}
