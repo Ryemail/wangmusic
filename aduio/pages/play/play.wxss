@@ -1,0 +1,93 @@
+/* pages/play/play.wxss */
+
+.details{
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-transform: scale(1.5);
+  transform: scale(1.5);
+  -webkit-transform-origin: center top;
+  transform-origin: center top;
+  z-index: -1;
+  -webkit-transition: opacity 0.3s linear;
+  transition: opacity 0.3s linear;
+  filter: blur(16px);
+  -webkit-filter: blur(16px);
+}
+.container::before{
+    content: " ";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-color: rgba(0,0,0,.5);
+}
+.animation_style{
+  padding-top: 140rpx;
+}
+.animationWrap{
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  width: 580rpx;
+  height: 580rpx;
+  background-size: contain;  
+}
+.photo{
+  position: absolute;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 50%;
+  width: 355rpx;
+  height: 355rpx;
+  transition: all 8s;
+  transform-origin: center center;
+  animation: photos 8s linear infinite;
+  transform: rotate(0);
+}
+@keyframes photos{
+ from {
+   transform: rotate(0);
+ }
+ to{
+   transform: rotate(360deg);
+ }
+}
+.animationWrap .play_btn{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 110rpx;
+  height: 110rpx;
+  text-align: center;
+  color: #fff;
+  border-radius: 50%;
+}
+.animationWrap .play_btn .iconfont{
+  font-size: 110rpx;
+  text-shadow: 0 0 5px #bbb
+}
+.playWrap{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150rpx;
+  z-index: 100;
+  background: #fff;
+}

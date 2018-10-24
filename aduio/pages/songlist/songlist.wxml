@@ -3,8 +3,8 @@
 <template name="songList">
   <view class="weui-cells weui-cells_after-title song_list">
     <block wx:for="{{ recommendSong.song }}"  wx:for-index="idx" wx:key="key">
-      <navigator url="" class="weui-cell weui-cell_access" hover-class="false">
-        <view class="weui-cell__hd" wx:if="{{ recommendSong.bool }}">
+      <navigator url="/pages/play/play?id={{ item.id }}" class="weui-cell weui-cell_access" hover-class="false">
+        <view class="weui-cell__hd" wx:if="{{ item.bool }}">
           <view class='{{ idx+1<4?"sgfl-cred":"" }}' style="margin-right: 8px;vertical-align: middle;width:20px; height: 20px;">{{ idx+1 }}</view>
         </view>
         <view class="weui-cell__bd">

@@ -1,0 +1,14 @@
+<!--pages/play/play.wxml-->
+<view class='container'><!-- http://p3.music.126.net/hWuFY0FTKAdXOFkAe6cDXA==/109951163607621375.jpg -->
+  <view class='details' style="background-image:url({{ detail.bg }});opacity:1"></view>
+  <view class='animation_style'>
+      <view class='animationWrap'style="background-image:url({{img_bg}})">
+        <image class='photo' bindtap='isPlay' style='animation-play-state:{{ state }}' src='{{ detail.bg }}'>
+        </image>
+         <view bindtap='isPlay' class='play_btn'><text hidden='{{ bool }}' class='iconfont icon-play_icon'></text></view>
+      </view>
+  </view>
+  <view class='lyric'></view>
+  <view class='playWrap'>
+  </view>
+</view>
