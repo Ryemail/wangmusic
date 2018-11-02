@@ -30,7 +30,7 @@
     background-color: rgba(0,0,0,.5);
 }
 .animation_style{
-  padding-top: 140rpx;
+  padding-top: 130rpx;
 }
 .animationWrap{
   overflow: hidden;
@@ -52,7 +52,7 @@
   height: 355rpx;
   transition: all 8s;
   transform-origin: center center;
-  animation: photos 8s linear infinite;
+  animation: photos 16s linear infinite;
   transform: rotate(0);
 }
 @keyframes photos{
@@ -80,14 +80,68 @@
 }
 .animationWrap .play_btn .iconfont{
   font-size: 110rpx;
-  text-shadow: 0 0 5px #bbb
+  text-shadow: 0 0 5px #bbb;
+  color: #e6e6e6;
 }
 .playWrap{
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 150rpx;
+  box-sizing: border-box;
+  min-height: 160rpx;
   z-index: 100;
-  background: #fff;
+  padding: 10rpx 36rpx 0;
+  color: #fff;
+  /* background: rgba(0, 0, 0, .2); */
+  box-shadow: 0 0 5px rgba(0, 0, 0, .4);
+}
+.lines{
+  position: absolute;
+  left: 45%;
+  top:0;
+  z-index: 1;
+  width: 192rpx;
+  height: 274rpx;
+}
+.play_b{
+  display: flex;
+  margin-top:-20rpx;
+  justify-content: space-between;
+  align-items: center;
+}
+.play_b>.iconfont{
+  display: block;
+  font-size: 72rpx;
+  cursor: pointer;
+}
+.body-view{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.silder{
+  flex: 1;
+}
+.play_b>.play-icon_t{
+  font-size: 60rpx;
+  transform: rotate(180deg)
+}
+.play_b>.play-icon_b,.play_b>.icon-shunxux,.play_b>.icon-home_menu{
+  font-size: 60rpx;
+  transition:  all .3;
+}
+.icon-play:hover,.icon-play_icon:hover{
+  text-shadow: 0 0 5px #e6e6e6;
+}
+.lyric{
+  width: auto;
+  margin-top: 40rpx;
+  text-align: center;
+  color: #fff;
+  height: 250rpx;
+  padding: 0 40rpx;
+}
+.liness{
+  margin: 6rpx 0;
 }

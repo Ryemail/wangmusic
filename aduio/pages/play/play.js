@@ -1,7 +1,8 @@
 // pages/play/play.js
 const app = getApp();
-const wxPromise = require('../../utils/util.js').wxPromise
-let sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
+const wxPromise = require('../../utils/util.js').wxPromise;
+import Lyric from  '../../utils/lyric-parser.js';
+// const Lyric = require('');
 const urlg = app.globalData.url;
 let that = null;
 Page({
@@ -14,8 +15,13 @@ Page({
       state:'running',
       bool: true,
       detail:{
-
-      }
+      },
+      progress:{//进度条
+        step:1,
+        size:13,
+        activeColor:'#d43c33'
+      },
+      lyric:[]
   },
 
   /**
@@ -23,10 +29,9 @@ Page({
    */
   onLoad: function (options) {
     that = this;
-    console.log(options)
     let id = '1318235595';
     this.getdetail(options.id || id)//歌曲详情
-    
+    this.getlyric(options.id || id)
   },
   getdetail(id){
     wxPromise(wx.request)({
@@ -34,12 +39,28 @@ Page({
       data:{ids:id}
     }).then((res) =>{
       let result = res.data.songs[0];
-      console.log(result)
       that.setData({
         ['detail.bg']: result.al.picUrl
       })
     }).catch((e) =>{
       console.log(e,'网络错误')
+    })
+  },
+  getlyric(id) {
+    wxPromise(wx.request)({
+      url: `${urlg}/lyric`,
+      data: { id: id }
+    }).then((res) => {
+      let result = res.data.lrc.lyric;
+      let lyric = new Lyric(result,(obj)=>{
+        console.log(obj)
+      })
+      console.log(lyric)
+      that.setData({
+        lyric: lyric.lines
+      })
+    }).catch((e) => {
+      console.log(e, '网络错误')
     })
   },
   isPlay(){

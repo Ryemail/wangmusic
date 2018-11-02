@@ -1,14 +1,37 @@
 <!--pages/play/play.wxml-->
-<view class='container'><!-- http://p3.music.126.net/hWuFY0FTKAdXOFkAe6cDXA==/109951163607621375.jpg -->
+<view class='container'>
+  <!-- http://p3.music.126.net/hWuFY0FTKAdXOFkAe6cDXA==/109951163607621375.jpg -->
   <view class='details' style="background-image:url({{ detail.bg }});opacity:1"></view>
   <view class='animation_style'>
-      <view class='animationWrap'style="background-image:url({{img_bg}})">
-        <image class='photo' bindtap='isPlay' style='animation-play-state:{{ state }}' src='{{ detail.bg }}'>
-        </image>
-         <view bindtap='isPlay' class='play_btn'><text hidden='{{ bool }}' class='iconfont icon-play_icon'></text></view>
+    <image class='lines' src='https://s3.music.126.net/m/s/img/needle-ip6.png?be4ebbeb6befadfcae75ce174e7db862'></image>
+    <view class='animationWrap' style="background-image:url({{img_bg}})">
+      <image class='photo' bindtap='isPlay' style='animation-play-state:{{ state }}' src='{{ detail.bg }}'>
+      </image>
+      <view bindtap='isPlay' class='play_btn'>
+        <text hidden='{{ bool }}' class='iconfont icon-play_icon'></text>
       </view>
+    </view>
   </view>
-  <view class='lyric'></view>
+  <scroll-view class='lyric' scroll-y>
+    <view wx:for="{{ lyric }}" class='liness'>
+      {{ item.txt }}
+    </view>
+  </scroll-view>
   <view class='playWrap'>
+    <!-- 音乐进度条 -->
+    <view class='progress'>
+      <view class="body-view">
+        <text>00:00</text>
+        <slider class='silder' bindchange="slider2change" activeColor="{{ progress.activeColor }}" step="{{ progress.step }}" block-size="{{ progress.size }}" />
+        <text>04:44</text>
+      </view>
+      <view class='play_b'>
+        <view class='iconfont icon-shunxux'></view>
+        <view class='iconfont icon-play_icon play-icon_t'></view>
+        <view class='iconfont icon-bofang icon-play'></view>
+        <view class='iconfont icon-play_icon play-icon_b'></view>
+        <view class='iconfont icon-home_menu'></view>
+      </view>
+    </view>
   </view>
 </view>

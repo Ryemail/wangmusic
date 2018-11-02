@@ -6,8 +6,9 @@ page {
   font-size: 16px;
   font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
   color: #333;
+  -webkit-tap-highlight-color: transparent;
 }
-
+	
 .page__hd {
   padding: 40px;
 }
@@ -44,4 +45,7 @@ page {
   text-overflow: ellipsis;
   white-space: nowrap;
   word-wrap: normal;
+}
+::-webkit-scrollbar{
+  background: transparent;
 }
