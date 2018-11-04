@@ -27,7 +27,7 @@ export default class Lyric {
   }
 
   _init() {
-    // this._initTag()
+    this._initTag()
 
     this._initLines()
   }

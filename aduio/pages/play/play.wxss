@@ -30,7 +30,7 @@
     background-color: rgba(0,0,0,.5);
 }
 .animation_style{
-  padding-top: 130rpx;
+  padding-top: 140rpx;
 }
 .animationWrap{
   overflow: hidden;
@@ -136,12 +136,16 @@
 }
 .lyric{
   width: auto;
-  margin-top: 40rpx;
+  margin-top: 50rpx;
   text-align: center;
   color: #fff;
-  height: 250rpx;
+  height: 180rpx;
   padding: 0 40rpx;
 }
 .liness{
-  margin: 6rpx 0;
+  line-height: 60rpx;
+  font-size: 32rpx;
+}
+.currentLine{
+  color: #d43c33;
 }

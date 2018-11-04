@@ -8,12 +8,12 @@
       <image class='photo' bindtap='isPlay' style='animation-play-state:{{ state }}' src='{{ detail.bg }}'>
       </image>
       <view bindtap='isPlay' class='play_btn'>
-        <text hidden='{{ bool }}' class='iconfont icon-play_icon'></text>
+        <text hidden='{{ !bool }}' class='iconfont icon-play_icon'></text>
       </view>
     </view>
   </view>
   <scroll-view class='lyric' scroll-y>
-    <view wx:for="{{ lyric }}" class='liness'>
+    <view wx:for="{{ lyric }}" wx:key="index" class='liness {{colorActive}}' data-time= "{{ item.time }}" data-line="{{ index }}">
       {{ item.txt }}
     </view>
   </scroll-view>
@@ -21,14 +21,14 @@
     <!-- 音乐进度条 -->
     <view class='progress'>
       <view class="body-view">
-        <text>00:00</text>
-        <slider class='silder' bindchange="slider2change" activeColor="{{ progress.activeColor }}" step="{{ progress.step }}" block-size="{{ progress.size }}" />
-        <text>04:44</text>
+        <text>{{ progress.startTime }}</text>
+        <slider class='silder' bindchange="sliderChange" block-color="{{ progress.blockColor }}" value='{{ progress.ratio*100 }}' activeColor="{{ progress.activeColor }}" step="{{ progress.step }}" block-size="{{ progress.size }}" />
+        <text>{{progress.endTime}}</text>
       </view>
       <view class='play_b'>
         <view class='iconfont icon-shunxux'></view>
         <view class='iconfont icon-play_icon play-icon_t'></view>
-        <view class='iconfont icon-bofang icon-play'></view>
+        <view class='iconfont icon-play {{ !bool?"icon-bofang":"icon-play_icon"}}'  bindtap='isPlay'></view>
         <view class='iconfont icon-play_icon play-icon_b'></view>
         <view class='iconfont icon-home_menu'></view>
       </view>
