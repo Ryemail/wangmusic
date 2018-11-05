@@ -148,4 +148,5 @@
 }
 .currentLine{
   color: #d43c33;
+  transition: all .6;
 }

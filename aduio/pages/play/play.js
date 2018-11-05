@@ -6,6 +6,7 @@ import Lyric from '../../utils/lyric-parser.js';
 let audio = null;
 const urlg = app.globalData.url;
 let that = null;
+let query = null;
 Page({
 
   /**
@@ -15,7 +16,12 @@ Page({
     img_bg: app.globalData.imgUrl,
     state: 'running',
     bool: false,
-    colorActive: '',
+    currentIndex: 0,//当前播放的哪一行歌曲
+    clientTop: 0,
+    position:0,
+    t: 0,
+    prev: [],
+    next: [],
     detail: {
     },
     progress: {//进度条
@@ -37,11 +43,20 @@ Page({
    */
   onLoad: function (options) {
     that = this;
+    let nextPrev = app.globalData.nextPrev;
+    let l = nextPrev.indexOf(1 * options.id)
+    this.setData({
+      prev: nextPrev.slice(0, l),
+      next: nextPrev.slice(l, nextPrev.length),
+      position:l
+    })
     let id = '1318235595';
     this.getdetail(options.id || id)//歌曲详情
     this.getlyric(options.id || id)//获取歌词
     this.getUrl(options.id || id)//获取音频地址
+
     audio = wx.createInnerAudioContext();
+    query = wx.createSelectorQuery();
 
   },
   getdetail(id) {
@@ -69,8 +84,17 @@ Page({
       that.setData({
         lyric: lyric.lines
       })
+      console.log(lyric.lines)
     }).catch((e) => {
       console.log(e, '网络错误')
+    })
+  },
+  /* 监听播放结束 */
+  watchEnd() {
+    audio.onEnded(() => {
+      that.setData({
+        state: 'paused'
+      })
     })
   },
   getUrl(id) {
@@ -82,12 +106,14 @@ Page({
         audio.src = res.data.data[0].url
         if (audio.src) {
           audio.autoplay = true
+          that.scroll();
           setTimeout(() => {
             audio.currentTime
             audio.onTimeUpdate(() => {
               let timeE = audio.duration, timeS = audio.currentTime, ratio = timeS / timeE;
               let start = that.sTom(timeS), end = that.sTom(timeE)
-              that.lineColor(timeS)
+              that.lineColor(timeS, timeE);//歌词播放进程
+              that.watchEnd();//歌曲播放接结束
               that.setData({
                 ['progress.endTime']: end,
                 ['progress.startTime']: start,
@@ -104,6 +130,15 @@ Page({
       console.log(e, '网络错误')
     })
   },
+  /* 滚动同步 */
+  scroll() {
+    query.select('.liness').boundingClientRect()
+    query.exec(function (res) {
+      that.setData({
+        t: res[0].height
+      })
+    })
+  },
   /* 秒转分 */
   sTom(t) {
     let s = Math.floor(t / 60) < 10 ? '0' + Math.floor(t / 60) : Math.floor(t / 60);
@@ -111,22 +146,26 @@ Page({
     return `${s}:${m}`
   },
   /* 歌词进度颜色 */
-  lineColor(currT) {
-    let times = this.data.lyric, arrTime = [];
+  lineColor(currT, sumeT) {
+    let lines = [{ time: 0, txt: '' }];
+    let times = lines.concat(this.data.lyric), numLine, l = times.length;
     for (let i = 0; i < times.length; i++) {
-      arrTime.push(times[i].time / 1000);
+      if (i < times.length - 1) {
+        let time1 = times[i].time / 1000, time2 = times[i + 1].time / 1000;
+        if (currT > time1 & currT < time2) {
+          numLine = i - 1;
+          that.data.clientTop += that.data.t;
+          break;
+        }
+      } else {
+        numLine = times.length - 2;
+      }
     }
-    for (let i = 0; i < arrTime.length; i++) {
-      let currTime = arrTime[i];
-      let nextTime = arrTime[i + 1];
-      /* console.log(currTime, nextTime) */
-    }
-    /* let colorActive = currTime >= currT && currT < nextTime ? 'currentLine' : '';
-    console.log(colorActive, 'ddddddddddddd')
+
     that.setData({
-      colorActive
-    }) */
-    return false;
+      currentIndex: numLine,
+      // clientTop: that.data.clientTop
+    })
   },
   /* 播放 */
   isPlay() {
@@ -151,9 +190,27 @@ Page({
     let w = e.detail.value;
     let currentTime = (w / 100) * that.data.progress.timeE;
     audio.seek(currentTime)//跳转到指定时间
+    audio.play();
     that.setData({
       ['progress.width']: w
     })
+  },
+  /* 歌词滚动 */
+  songScroll(e) {
+    console.log(e)
+  },
+  /* 下一首*/
+  next(){
+    this.getdetail(id)//歌曲详情
+    this.getlyric(id)//获取歌词
+    this.getUrl(id)//获取音频地址
+  },
+  /* 上一首 */
+  prev(){
+    console.log(that.data.prev)
+    this.getdetail(id)//歌曲详情
+    this.getlyric(id)//获取歌词
+    this.getUrl(id)//获取音频地址
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -166,7 +223,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**

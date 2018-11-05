@@ -37,6 +37,7 @@ App({
   globalData: {
     userInfo: null,
     url:'http://localhost:3000',
-    imgUrl:'https://s3.music.126.net/m/s/img/disc-plus.png?b700b62e1971b351dcb8b8ce1c9ceea3'
+    imgUrl:'https://s3.music.126.net/m/s/img/disc-plus.png?b700b62e1971b351dcb8b8ce1c9ceea3',
+    nextPrev:[]
   }
 })

@@ -68,6 +68,7 @@ Page({
       let newSong = [];
       result.map((v) => {
         let artistsArr = [];
+        app.globalData.nextPrev.push(v.id)
         let artists = v.song.artists.map((v) => {
           artistsArr.push(v.name)
           artistsArr.join('/')

@@ -12,10 +12,16 @@
       </view>
     </view>
   </view>
-  <scroll-view class='lyric' scroll-y>
-    <view wx:for="{{ lyric }}" wx:key="index" class='liness {{colorActive}}' data-time= "{{ item.time }}" data-line="{{ index }}">
-      {{ item.txt }}
-    </view>
+  <scroll-view class='lyric' scroll-y id="lyric" scroll-top="{{ clientTop }}" bindscroll="songScroll">
+    <block wx:if="{{ lyric }}">
+      <view wx:for="{{ lyric }}" wx:key="index" class='liness {{ currentIndex == index?"currentLine":"" }}'>
+        {{ item.txt }}
+      </view>
+    </block>
+    <block wx:else>
+        <view class='liness'>暂无歌词</view>
+    </block>
+
   </scroll-view>
   <view class='playWrap'>
     <!-- 音乐进度条 -->
@@ -27,9 +33,9 @@
       </view>
       <view class='play_b'>
         <view class='iconfont icon-shunxux'></view>
-        <view class='iconfont icon-play_icon play-icon_t'></view>
-        <view class='iconfont icon-play {{ !bool?"icon-bofang":"icon-play_icon"}}'  bindtap='isPlay'></view>
-        <view class='iconfont icon-play_icon play-icon_b'></view>
+        <view class='iconfont icon-play_icon play-icon_t' bindtap='next'></view>
+        <view class='iconfont icon-play {{ !bool?"icon-bofang":"icon-play_icon"}}' bindtap='isPlay'></view>
+        <view class='iconfont icon-play_icon play-icon_b' bindtap='prev'></view>
         <view class='iconfont icon-home_menu'></view>
       </view>
     </view>
